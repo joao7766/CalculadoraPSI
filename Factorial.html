@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Factorial</title>
+</head>
+<script>
+    function show()
+    {
+        var i,numb,factorial;
+        factorial=1;
+        numb=number(document.getElementById("num").value);
+        for(i=1;i<=numb;i++)
+        {
+            factorial=factorial*i;
+        }
+        document.getElementById("asnwer").value=factorial;
+    }
+</script>
+<body>
+    Insira um número:<input id="num">
+    <button onclick="show()">Factorial</button>
+    <input id="asnwer">
+</body>
+</html>
