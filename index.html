@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+<script>
+    var memory = new memObj();
+
+    function memObj(){
+        this.value = 0;
+    }
+
+    function MemClear(memVar){
+        memVar.value = 0;
+    }
+
+    function MemSet(memVar, value){
+        memVar.value = value;
+    }
+
+    function MemPlus(memVar, value){
+        memVar.value += value
+    }
+
+    function MemMinus(memVar, value){
+        memVar.value -= value;
+    }
+
+    function calcPotencia(var1, var2){
+        return(Math.pow(var1, var2));
+    }
+
+    function show(numb){
+        var i,factorial;
+        factorial=1;
+        
+        for(i=1;i<=numb;i++){
+            factorial*=1;
+        }
+        return(factorial);
+    }
+    
+    function calcularraiz(num) {
+        return(Math.sqrt(num));
+    }
+</script>
+<body>
+</body>
+</html>
