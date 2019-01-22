@@ -5,21 +5,26 @@
     <title>Calculadora</title>
 </head>
 <script>
-    var memory = 0;
-    function MemClear(){
-        memory = 0;
+    var memory = new memObj();
+
+    function memObj(){
+        this.value = 0;
     }
 
-    function MemSet(value){
-        memory = value;
+    function MemClear(memVar){
+        memVar.value = 0;
+    }
+
+    function MemSet(memVar, value){
+        memVar.value = value;
     }
 
     function MemPlus(memVar, value){
-        return (memVar + value);
+        memVar.value += value
     }
 
     function MemMinus(memVar, value){
-        return (memVar - value);
+        memVar.value -= value;
     }
 </script>
 <body>
