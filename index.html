@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+<script>
+    var memory = new memObj();
+
+    function memObj(){
+        this.value = 0;
+    }
+
+    function MemClear(memVar){
+        memVar.value = 0;
+    }
+
+    function MemSet(memVar, value){
+        memVar.value = value;
+    }
+
+    function MemPlus(memVar, value){
+        memVar.value += value
+    }
+
+    function MemMinus(memVar, value){
+        memVar.value -= value;
+    }
+</script>
+<body>
+</body>
+</html>
