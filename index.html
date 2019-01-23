@@ -2,49 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora</title>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
+<style>
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        margin: 0;
+
+    }
+    #numberBoxDiv{
+        margin:auto;
+        width: 250px;
+        margin-bottom: 25px;
+        margin-top: 15px;
+    }
+    #numberBox{
+        color: white;
+        height: 53px;
+        padding-left: 5px;
+        padding-top: 5px;
+    }
+    .calculator{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 248px;
+        height: 493px;
+        background-color: #2b2a2b;
+        -webkit-box-shadow: 2px 5px 50px 23px rgba(0,0,0,0.24);
+        box-shadow: 2px 5px 50px 23px rgba(0,0,0,0.24);
+        zoom: 0.5;
+        -moz-transform: scale();
+    }
+    .btnNumber{
+        margin: auto;
+        width: 248px;
+        text-align: center;
+    }
+    .btn{
+        width:56px;
+        height:53px;
+        margin-right:1px;
+        margin-bottom:4px;
+        border-radius: 0px;
+    }
+    .btn-primary{
+        background-color: #4b4a4b;
+        border: 0;
+    }
+    .btn-function{
+        background-color: #333233;
+        border: 0;
+    }
+    .btn-equal{
+        background-color: #ca4e17;
+    }
+    #doubleBtn{
+        width: 117px;
+    }
+</style>
 <script>
-    var memory = new memObj();
-
-    function memObj(){
-        this.value = 0;
+    function num(id) {
+        document.getElementById("numberBox").innerText += id;
     }
 
-    function MemClear(memVar){
-        memVar.value = 0;
+    function apaga(){
+        var numbers = document.getElementById("numberBox").innerText;
+        var res = numbers.substring(0, (numbers.length-1));
+        document.getElementById("numberBox").innerText = res;
+
     }
 
-    function MemSet(memVar, value){
-        memVar.value = value;
-    }
-
-    function MemPlus(memVar, value){
-        memVar.value += value
-    }
-
-    function MemMinus(memVar, value){
-        memVar.value -= value;
-    }
-
-    function calcPotencia(var1, var2){
-        return(Math.pow(var1, var2));
-    }
-
-    function calcFactorial(numb){
-        var i,factorial;
-        factorial=1;
-
-        for(i=1;i<=numb;i++){
-            factorial*=1;
-        }
-        return(factorial);
-    }
-
-    function calcSqrt(num) {
-        return(Math.sqrt(num));
-    }
 </script>
 <body>
+    <div class="calculator">
+        <div id="numberBoxDiv">
+            <h1 id="numberBox">0</h1>
+        </div>
+        <div class="btnNumber">
+            <div>
+                <button class="btn btn-primary btn-function">MC</button>
+                <button class="btn btn-primary btn-function">MR</button>
+                <button class="btn btn-primary btn-function">MS</button>
+                <button class="btn btn-primary btn-function">M+</button>
+                <button class="btn btn-primary btn-function">M-</button>
+                <button class="btn btn-primary btn-function">Sqrt</button>
+                <button class="btn btn-primary btn-function">^</button>
+                <button class="btn btn-primary btn-function">!</button>
+            </div>
+            <div>
+                <button class="btn btn-primary btn-function" id="doubleBtn">C</button>
+                <button onclick="apaga()" class="btn btn-primary btn-function">←</button>
+                <button class="btn btn-primary btn-function">AC</button>
+            </div>
+            <div>
+                <button onclick="num(9)" class="btn btn-primary">9</button>
+                <button onclick="num(8)" class="btn btn-primary">8</button>
+                <button onclick="num(7)" class="btn btn-primary">7</button>
+                <button class="btn btn-primary btn-function">+</button>
+            </div>
+            <div>
+                <button onclick="num(6)" class="btn btn-primary">6</button>
+                <button onclick="num(5)" class="btn btn-primary">5</button>
+                <button onclick="num(4)" class="btn btn-primary">4</button>
+                <button class="btn btn-primary btn-function">-</button>
+            </div>
+            <div>
+                <button onclick="num(3)" class="btn btn-primary">3</button>
+                <button onclick="num(2)" class="btn btn-primary">2</button>
+                <button onclick="num(1)" class="btn btn-primary">1</button>
+                <button class="btn btn-primary btn-function">*</button>
+            </div>
+            <div>
+                <button class="btn btn-primary">0</button>
+                <button onclick="num('.')" class="btn btn-primary">.</button>
+                <button onclick="" class="btn btn-primary btn-equal">=</button>
+                <button class="btn btn-primary btn-function">/</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
