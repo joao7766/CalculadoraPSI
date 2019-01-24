@@ -7,18 +7,24 @@
 </head>
 <style>
     html {
+        width: 100%;
         height: 100%;
     }
     body {
+        width: 100%;
         height: 100%;
+        min-height: 100% !important;
         margin: 0;
-
+        background: -moz-linear-gradient(-45deg, #ed904e 0%, #e85612 99%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #ed904e 0%,#e85612 99%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #ed904e 0%,#e85612 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     }
     #numberBoxDiv{
         margin:auto;
-        width: 250px;
+        width: 95%;
         margin-bottom: 25px;
         margin-top: 15px;
+        height: 10.75%;
     }
     #numberBox{
         color: white;
@@ -33,29 +39,38 @@
         left: 0;
         right: 0;
         margin: auto;
-        width: 248px;
-        height: 493px;
+        width: 30vw;
+        height: 80vh;
         background-color: #2b2a2b;
         -webkit-box-shadow: 2px 5px 50px 23px rgba(0,0,0,0.24);
         box-shadow: 2px 5px 50px 23px rgba(0,0,0,0.24);
-        zoom: 0.5;
-        -moz-transform: scale();
+        border-radius: 8px;
     }
     .btnNumber{
         margin: auto;
-        width: 248px;
+        width: 100%;
+        height: 89.25%;
         text-align: center;
     }
     .btn{
-        width:56px;
-        height:53px;
+        width:22.58%;
+        height:8.8vh;
         margin-right:1px;
         margin-bottom:4px;
-        border-radius: 0px;
+        border-radius: 0;
     }
-    .btn-primary{
+    .btn-warning{
         background-color: #4b4a4b;
         border: 0;
+        color: white;
+    }
+    .btn-warning:hover{
+        background-color: #ff7e1c;
+        border: 0;
+    }
+    .btn-warning:active{
+        border: 0;
+        background-color: #e85612;
     }
     .btn-function{
         background-color: #333233;
@@ -65,18 +80,42 @@
         background-color: #ca4e17;
     }
     #doubleBtn{
-        width: 117px;
+        width: 47.18%;
     }
 </style>
-<script src="Funções.js">
+<script src="Funções.js"></script>
+<script>
     function num(id) {
-        document.getElementById("numberBox").innerText += id;
+        var num = document.getElementById("numberBox").innerText;
+        if(num === "0"){
+            num = id;
+        }
+        else
+        {
+            num += id;
+        }
+        document.getElementById("numberBox").innerText = num;
+    }
+
+    function apagaUm(){
+        var numbers = document.getElementById("numberBox").innerText;
+        var res;
+        if(numbers.length === 1)
+        {
+            res = 0;
+        }
+        else {
+            res = numbers.substring(0, (numbers.length - 1));
+        }
+        document.getElementById("numberBox").innerText = res;
+
     }
 
     function apaga(){
-        var numbers = document.getElementById("numberBox").innerText;
-        var res = numbers.substring(0, (numbers.length-1));
-        document.getElementById("numberBox").innerText = res;
+        document.getElementById("numberBox").innerText = 0;
+    }
+
+    function apagaTudo(){
 
     }
 
@@ -88,43 +127,43 @@
         </div>
         <div class="btnNumber">
             <div>
-                <button class="btn btn-primary btn-function">MC</button>
-                <button class="btn btn-primary btn-function">MR</button>
-                <button class="btn btn-primary btn-function">MS</button>
-                <button class="btn btn-primary btn-function">M+</button>
-                <button class="btn btn-primary btn-function">M-</button>
-                <button class="btn btn-primary btn-function">Sqrt</button>
-                <button class="btn btn-primary btn-function">^</button>
-                <button class="btn btn-primary btn-function">!</button>
+                <button class="btn btn-warning btn-function" style="border-radius: 8px 0px 0px 0px;">MC</button>
+                <button class="btn btn-warning btn-function">MR</button>
+                <button class="btn btn-warning btn-function">MS</button>
+                <button class="btn btn-warning btn-function" style="border-radius: 0px 8px 0px 0px;">M+</button>
+                <button class="btn btn-warning btn-function">M-</button>
+                <button class="btn btn-warning btn-function">Sqrt</button>
+                <button class="btn btn-warning btn-function">^</button>
+                <button class="btn btn-warning btn-function">!</button>
             </div>
             <div>
-                <button class="btn btn-primary btn-function" id="doubleBtn">C</button>
-                <button onclick="apaga()" class="btn btn-primary btn-function">←</button>
-                <button class="btn btn-primary btn-function">AC</button>
+                <button onclick="apaga()" class="btn btn-warning btn-function" id="doubleBtn">C</button>
+                <button onclick="apagaUm()" class="btn btn-warning btn-function">←</button>
+                <button onclick="apagaTudo()" class="btn btn-warning btn-function">AC</button>
             </div>
             <div>
-                <button onclick="num(9)" class="btn btn-primary">9</button>
-                <button onclick="num(8)" class="btn btn-primary">8</button>
-                <button onclick="num(7)" class="btn btn-primary">7</button>
-                <button class="btn btn-primary btn-function">+</button>
+                <button onclick="num(9)" class="btn btn-warning">9</button>
+                <button onclick="num(8)" class="btn btn-warning">8</button>
+                <button onclick="num(7)" class="btn btn-warning">7</button>
+                <button class="btn btn-warning btn-function">+</button>
             </div>
             <div>
-                <button onclick="num(6)" class="btn btn-primary">6</button>
-                <button onclick="num(5)" class="btn btn-primary">5</button>
-                <button onclick="num(4)" class="btn btn-primary">4</button>
-                <button class="btn btn-primary btn-function">-</button>
+                <button onclick="num(6)" class="btn btn-warning">6</button>
+                <button onclick="num(5)" class="btn btn-warning">5</button>
+                <button onclick="num(4)" class="btn btn-warning">4</button>
+                <button class="btn btn-warning btn-function">-</button>
             </div>
             <div>
-                <button onclick="num(3)" class="btn btn-primary">3</button>
-                <button onclick="num(2)" class="btn btn-primary">2</button>
-                <button onclick="num(1)" class="btn btn-primary">1</button>
-                <button class="btn btn-primary btn-function">*</button>
+                <button onclick="num(3)" class="btn btn-warning">3</button>
+                <button onclick="num(2)" class="btn btn-warning">2</button>
+                <button onclick="num(1)" class="btn btn-warning">1</button>
+                <button class="btn btn-warning btn-function">*</button>
             </div>
             <div>
-                <button class="btn btn-primary">0</button>
-                <button onclick="num('.')" class="btn btn-primary">.</button>
-                <button onclick="" class="btn btn-primary btn-equal">=</button>
-                <button class="btn btn-primary btn-function">/</button>
+                <button class="btn btn-warning" style="border-radius: 0px 0px 0px 8px;">0</button>
+                <button onclick="num('.')" class="btn btn-warning">.</button>
+                <button onclick="" class="btn btn-warning btn-equal">=</button>
+                <button class="btn btn-warning btn-function" style="border-radius: 0px 0px 8px 0px;">/</button>
             </div>
         </div>
     </div>
