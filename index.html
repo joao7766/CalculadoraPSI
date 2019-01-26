@@ -15,9 +15,47 @@
         height: 100%;
         min-height: 100% !important;
         margin: 0;
-        background: -moz-linear-gradient(-45deg, #ed904e 0%, #e85612 99%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(-45deg, #ed904e 0%,#e85612 99%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(135deg, #ed904e 0%,#e85612 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        background: linear-gradient(-45deg, #ee9828, #e76c20, #d53819, #d50f48);
+        background-size: 400% 400%;
+        -webkit-animation: Gradient 15s ease infinite;
+        -moz-animation: Gradient 15s ease infinite;
+        animation: Gradient 15s ease infinite;
+    }
+
+    @-webkit-keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
     }
     #numberBoxDiv{
         margin:auto;
@@ -39,7 +77,7 @@
         left: 0;
         right: 0;
         margin: auto;
-        width: 30vw;
+        width: 20em;
         height: 80vh;
         background-color: #2b2a2b;
         -webkit-box-shadow: 2px 5px 50px 23px rgba(0,0,0,0.24);
@@ -49,7 +87,7 @@
     .btnNumber{
         margin: auto;
         width: 100%;
-        height: 89.25%;
+        height: 81%;
         text-align: center;
     }
     .btn{
@@ -80,42 +118,88 @@
         background-color: #ca4e17;
     }
     #doubleBtn{
-        width: 47.18%;
+        width: 46.5%;
+    }
+
+    @media (max-height: 685px) {
+        .calculator{
+            height: 82%;
+        }
+
+    }
+
+    @media (max-height: 545px) {
+        .calculator{
+            height: 90%;
+        }
+
     }
 </style>
 <script src="Funções.js"></script>
+<script src="comum.js"></script>
 <script>
-    function num(id) {
-        var num = document.getElementById("numberBox").innerText;
-        if(num === "0"){
-            num = id;
-        }
-        else
-        {
-            num += id;
-        }
-        document.getElementById("numberBox").innerText = num;
+
+    var calc = new calculadora();
+
+    function carrega(id){
+        calc.setVisor(id);
+        document.getElementById("numberBox").innerText = calc.getVisor();
+    }
+
+    function resolve(){
+        calc.setEqual();
+        document.getElementById("numberBox").innerText = calc.getVisor();
     }
 
     function apagaUm(){
-        var numbers = document.getElementById("numberBox").innerText;
-        var res;
-        if(numbers.length === 1)
+        if(calc.getVisor().length === 1)
         {
-            res = 0;
+            calc.setOverwrite(true);
+            calc.setVisor('0');
+            calc.setOverwrite(true);
         }
-        else {
-            res = numbers.substring(0, (numbers.length - 1));
-        }
-        document.getElementById("numberBox").innerText = res;
+        else{
 
+            document.getElementById("numberBox").innerText = calc.getVisor().substring(0, (calc.getVisor().length - 1));
+            calc.setOverwrite(true);
+            calc.setVisor(document.getElementById("numberBox").innerText);
+        }
+        document.getElementById("numberBox").innerText = calc.getVisor();
     }
 
-    function apaga(){
+    function apagaC(){
         document.getElementById("numberBox").innerText = 0;
+        calc.setOverwrite(true);
+        calc.setVisor(document.getElementById("numberBox").innerText);
+        calc.setOverwrite(true);
     }
 
-    function apagaTudo(){
+    function AC(){
+        location.reload();
+    }
+
+    function memClear(){
+        MemClear(memory);
+    }
+
+    function memSet(){
+        MemSet(memory, parseFloat(calc.getVisor()));
+    }
+
+    function memRead() {
+        calc.setOverwrite(true);
+        calc.setVisor(MemRead(memory));
+        document.getElementById("numberBox").innerText = calc.getVisor();
+    }
+
+    function memPlus(){
+        MemPlus(memory, parseFloat(calc.getVisor()));
+        memRead();
+    }
+
+    function memMinus(){
+        MemMinus(memory, parseFloat(calc.getVisor()));
+        memRead();
 
     }
 
@@ -127,43 +211,43 @@
         </div>
         <div class="btnNumber">
             <div>
-                <button class="btn btn-warning btn-function" style="border-radius: 8px 0px 0px 0px;">MC</button>
-                <button class="btn btn-warning btn-function">MR</button>
-                <button class="btn btn-warning btn-function">MS</button>
-                <button class="btn btn-warning btn-function" style="border-radius: 0px 8px 0px 0px;">M+</button>
-                <button class="btn btn-warning btn-function">M-</button>
-                <button class="btn btn-warning btn-function">Sqrt</button>
-                <button class="btn btn-warning btn-function">^</button>
-                <button class="btn btn-warning btn-function">!</button>
+                <button onclick="memClear()" class="btn btn-warning btn-function" style="border-radius: 8px 0px 0px 0px;">MC</button>
+                <button onclick="memRead()" class="btn btn-warning btn-function">MR</button>
+                <button onclick="memSet()" class="btn btn-warning btn-function">MS</button>
+                <button onclick="memPlus()" class="btn btn-warning btn-function" style="border-radius: 0px 8px 0px 0px;">M+</button>
+                <button onclick="memMinus()" class="btn btn-warning btn-function">M-</button>
+                <button onclick="" class="btn btn-warning btn-function">Sqrt</button>
+                <button onclick="" class="btn btn-warning btn-function">^</button>
+                <button onclick="" class="btn btn-warning btn-function">!</button>
             </div>
             <div>
-                <button onclick="apaga()" class="btn btn-warning btn-function" id="doubleBtn">C</button>
+                <button onclick="apagaC()" class="btn btn-warning btn-function" id="doubleBtn">C</button>
                 <button onclick="apagaUm()" class="btn btn-warning btn-function">←</button>
-                <button onclick="apagaTudo()" class="btn btn-warning btn-function">AC</button>
+                <button onclick="" class="btn btn-warning btn-function">AC</button>
             </div>
             <div>
-                <button onclick="num(9)" class="btn btn-warning">9</button>
-                <button onclick="num(8)" class="btn btn-warning">8</button>
-                <button onclick="num(7)" class="btn btn-warning">7</button>
-                <button class="btn btn-warning btn-function">+</button>
+                <button onclick="carrega('7')" class="btn btn-warning">7</button>
+                <button onclick="carrega('8')" class="btn btn-warning">8</button>
+                <button onclick="carrega('9')" class="btn btn-warning">9</button>
+                <button onclick="carrega('+')" class="btn btn-warning btn-function">+</button>
             </div>
             <div>
-                <button onclick="num(6)" class="btn btn-warning">6</button>
-                <button onclick="num(5)" class="btn btn-warning">5</button>
-                <button onclick="num(4)" class="btn btn-warning">4</button>
-                <button class="btn btn-warning btn-function">-</button>
+                <button onclick="carrega('4')" class="btn btn-warning">4</button>
+                <button onclick="carrega('5')" class="btn btn-warning">5</button>
+                <button onclick="carrega('6')" class="btn btn-warning">6</button>
+                <button onclick="carrega('-')" class="btn btn-warning btn-function">-</button>
             </div>
             <div>
-                <button onclick="num(3)" class="btn btn-warning">3</button>
-                <button onclick="num(2)" class="btn btn-warning">2</button>
-                <button onclick="num(1)" class="btn btn-warning">1</button>
-                <button class="btn btn-warning btn-function">*</button>
+                <button onclick="carrega('1')" class="btn btn-warning">1</button>
+                <button onclick="carrega('2')" class="btn btn-warning">2</button>
+                <button onclick="carrega('3')" class="btn btn-warning">3</button>
+                <button onclick="carrega('*')" class="btn btn-warning btn-function">*</button>
             </div>
             <div>
-                <button class="btn btn-warning" style="border-radius: 0px 0px 0px 8px;">0</button>
-                <button onclick="num('.')" class="btn btn-warning">.</button>
-                <button onclick="" class="btn btn-warning btn-equal">=</button>
-                <button class="btn btn-warning btn-function" style="border-radius: 0px 0px 8px 0px;">/</button>
+                <button onclick="carrega('0')" class="btn btn-warning" style="border-radius: 0px 0px 0px 8px;">0</button>
+                <button onclick="carrega('.')" class="btn btn-warning">.</button>
+                <button onclick="resolve()" class="btn btn-warning btn-equal">=</button>
+                <button onclick="carrega('/')" class="btn btn-warning btn-function" style="border-radius: 0px 0px 8px 0px;">/</button>
             </div>
         </div>
     </div>
