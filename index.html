@@ -180,6 +180,7 @@
 
     function memClear(){
         MemClear(memory);
+        memRead();
     }
 
     function memSet(){
@@ -190,6 +191,7 @@
         calc.setOverwrite(true);
         calc.setVisor(MemRead(memory));
         document.getElementById("numberBox").innerText = calc.getVisor();
+        calc.setOverwrite(true);
     }
 
     function memPlus(){
@@ -201,6 +203,10 @@
         MemMinus(memory, parseFloat(calc.getVisor()));
         memRead();
 
+    }
+
+    function restart(){
+        location.reload();
     }
 
 </script>
@@ -216,14 +222,14 @@
                 <button onclick="memSet()" class="btn btn-warning btn-function">MS</button>
                 <button onclick="memPlus()" class="btn btn-warning btn-function" style="border-radius: 0px 8px 0px 0px;">M+</button>
                 <button onclick="memMinus()" class="btn btn-warning btn-function">M-</button>
-                <button onclick="" class="btn btn-warning btn-function">Sqrt</button>
-                <button onclick="" class="btn btn-warning btn-function">^</button>
-                <button onclick="" class="btn btn-warning btn-function">!</button>
+                <button onclick="carrega('√')" class="btn btn-warning btn-function">√</button>
+                <button onclick="carrega('^')" class="btn btn-warning btn-function">^</button>
+                <button onclick="carrega('!')" class="btn btn-warning btn-function">!</button>
             </div>
             <div>
                 <button onclick="apagaC()" class="btn btn-warning btn-function" id="doubleBtn">C</button>
                 <button onclick="apagaUm()" class="btn btn-warning btn-function">←</button>
-                <button onclick="" class="btn btn-warning btn-function">AC</button>
+                <button onclick="restart()" class="btn btn-warning btn-function">AC</button>
             </div>
             <div>
                 <button onclick="carrega('7')" class="btn btn-warning">7</button>

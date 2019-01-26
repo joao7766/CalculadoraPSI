@@ -10,7 +10,8 @@ function calculadora() {
             case '-': return n1-n2;
             case '*': return n1*n2;
             case '/': return n1/n2;
-            case '^': return Math.pow(num1, num2);
+            case '^': return Math.pow(n1, n2);
+            case '√': return Math.sqrt(n1);
             case '!': return calcFactorial(n1);
         }
     }
@@ -26,6 +27,9 @@ function calculadora() {
 
     this.setVisor=function (txt) {
         switch (txt) {
+            case '^':
+            case '√':
+            case '!':
             case '+':
             case '-':
             case '*':
@@ -45,7 +49,7 @@ function calculadora() {
     }
 
     this.getVisor=function () {
-        return visor;
+        return visor.toString().substring(0,14);
     }
 
     this.setN1=function(value){
@@ -62,13 +66,13 @@ function calculadora() {
     }
     this.setOp=function (operacao) {
         if(pronto){
-            n2=parseInt(visor);
+            n2=parseFloat(visor);
             visor=this.calcula();
             pronto=false;
             overwrite=true;
         }
         else{
-            n1=parseInt(visor);
+            n1=parseFloat(visor);
             op=operacao;
             pronto=true;
             overwrite=true;
@@ -81,13 +85,13 @@ function calculadora() {
     }
     this.setEqual=function () {
         if(pronto){
-            n2=parseInt(visor);
+            n2=parseFloat(visor);
             visor=this.calcula();
             pronto=false;
             overwrite=true;
         }
         else{
-            n1=parseInt(visor);
+            n1=parseFloat(visor);
             overwrite=true;
         }
     }
@@ -97,8 +101,12 @@ function calcFactorial(numb){
     var i,factorial;
     factorial=1;
 
-    for(i=1;i<=numb;i++){
-        factorial*=1;
+    console.log(numb);
+
+    for(i=numb;i>=1;i--){
+        console.log("ciclo n:" +  i);
+        factorial*=i;
     }
+    console.log(factorial);
     return(factorial);
 }
